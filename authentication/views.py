@@ -5,34 +5,44 @@ from django.core.mail import send_mail
 
 
 def loginpage(request):
-
     if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-        username = request.POST['username']
-        password = request.POST['password']
-
-        user = authenticate(username = username,password = password)
+        user = authenticate(username=username, password=password)
 
         if user is not None:
+            login(request, user)
 
-            getmail = User.objects.get(username = username)
-            mail = getmail.email
+            getmail = User.objects.get(username=username)
+            mail1 = getmail.email
+            print(type(mail1))
+
+            # Corrected order and removal of trailing commas
+            subject = 'Notification'
+            message = 'You are logged in'
+            email_from = 'mohan638010@gmail.com'
+            recipient_list = [mail1]
+
+            send_mail(subject, message, email_from, recipient_list)  # Correct order
+
+            return redirect('index')
+
+
+           
+
+            
+            # mail = getmail.email
             
             # print(getmail.id)
             # print(getmail.username)
             # print(getmail.email)
-            subject='Notificatifhfhdfhon',  # Default subject
-            message='you are loggined',
-            email_from='mohan638010@gmail.com',  # Default from email
-            recipient_list = ['mon638361@gmail.com']
-
-            send_mail(subject,message,recipient_list,email_from)
-
-            login(request, user)
-
            
 
-            return redirect('index')
+
+            
+
+            # return redirect('index')
         
         else:
             context = {
@@ -84,3 +94,9 @@ def sigpage(request):
             return redirect('/')
 
     return render(request,'signup.html')
+
+
+
+   
+
+    
