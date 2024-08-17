@@ -14,3 +14,10 @@ nav a {
     text-decoration: none;
     color: #333;
 }
+
+.logerror{
+
+    color: red;
+    font-weight: bold;
+    padding: 10px;
+}

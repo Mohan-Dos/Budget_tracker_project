@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-n3%90n!%+cva73*+@_eg#*2l*p32wm$**(t&htkfv0ilcrh(%w'
+SECRET_KEY = 'django-insecure-z_!9=&&6(t1+_vg3n%*ydql(g@(0z@a=($h+fm*kofhty#hk_j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'authentication',
+    'frontend',
     'app',
 ]
 
@@ -78,7 +80,7 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'budget_db',
+        'NAME':'budget_db',
         'USER' : 'root',
         'PASSWORD' : '4321',
         'HOST' : 'localhost',
@@ -130,4 +132,13 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+AUTH_USER_MODEL = 'authentication.User'
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'mohan638010@gmail.com'
+EMAIL_HOST_PASSWORD = 'jwyiskvgzwszbsbz'
